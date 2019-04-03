@@ -1,0 +1,25 @@
+﻿<Page
+    x:Class="WebinarRx.Sample0.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WebinarRx"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sample0="using:WebinarRx.Sample0"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <sample0:ViewModel />
+    </Page.DataContext>
+
+    <StackPanel Margin="10">
+
+        <TextBox Header="First name:" Text="{Binding FirstName, Mode=TwoWay}" />
+        <TextBox Header="Last name:" Text="{Binding LastName, Mode=TwoWay}" />
+
+        <controls:HeaderedTextBlock Header="Full name:" Text="{Binding FullName}" />
+
+    </StackPanel>
+</Page>
