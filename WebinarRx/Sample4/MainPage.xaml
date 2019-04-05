@@ -13,7 +13,7 @@
         <sample4:ViewModel />
     </Page.DataContext>
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition />
