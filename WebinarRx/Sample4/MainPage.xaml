@@ -25,7 +25,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBox Header="Search" ToolTipService.ToolTip="Type a search query" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-            <Button Grid.Column="1" Command="{Binding ExecuteSearch}" Content="Search" />
+            <!--<Button Grid.Column="1" Command="{Binding ExecuteSearch}" Content="Search" />-->
         </Grid>
 
         <ListView HorizontalContentAlignment="Stretch" Grid.Row="1"
@@ -37,12 +37,7 @@
                         <TextBlock Text="{Binding Title, Mode=OneWay}" />
                         <TextBlock Text="{Binding DisplayUrl, Mode=OneWay}" FontSize="12" />
                         <TextBlock Margin="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
-                                   Text="{Binding Description}" />
-                        <!--<TextBlock FontSize="12" Margin="12,2" TextAlignment="Right">
-                            <Hyperlink Command="{Binding OpenUrlCommand}" NavigateUri="{Binding Url}">
-                                <Run Text="{Binding DisplayUrl, Mode=OneWay}" />
-                            </Hyperlink>
-                        </TextBlock>-->
+                                   Text="{Binding Description}" />                       
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

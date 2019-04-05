@@ -19,15 +19,14 @@ namespace WebinarRx.Sample4
         {
             client = new WebSearchClient(new ApiKeyServiceClientCredentials("f891515b49d94b64aa91955aa92c1691"));
 
-            ExecuteSearch = ReactiveCommand.CreateFromTask(Search);
+            ExecuteSearch = ReactiveCommand.CreateFromTask((string s) => Search(s));
             ExecuteSearch.Subscribe(r => SearchResults = r);
 
             this.WhenAnyValue(x => x.SearchQuery)
-                .Throttle(TimeSpan.FromSeconds(0.8), RxApp.TaskpoolScheduler)
+                .Throttle(TimeSpan.FromSeconds(0.8))
                 .Select(query => query?.Trim())
                 .DistinctUntilChanged()
                 .Where(query => !string.IsNullOrWhiteSpace(query))
-                .ObserveOn(RxApp.MainThreadScheduler)
                 .InvokeCommand(ExecuteSearch);
         }
 
@@ -54,7 +53,8 @@ namespace WebinarRx.Sample4
                 DisplayUrl = x.DisplayUrl,
                 Url = x.Url,
                 Title = x.Text,
-                Description = x.Description
+                Description = x.Snippet,
+                
             });
 
             return results;
