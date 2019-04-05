@@ -28,7 +28,6 @@ namespace WebinarRx.Sample4
                 .DistinctUntilChanged()
                 .Where(query => !string.IsNullOrWhiteSpace(query))
                 .ObserveOn(RxApp.MainThreadScheduler)
-                .Select(s => Unit.Default)
                 .InvokeCommand(ExecuteSearch);
         }
 
