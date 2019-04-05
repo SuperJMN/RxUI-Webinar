@@ -1,0 +1,51 @@
+﻿<Page
+    x:Class="WebinarRx.Sample4.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WebinarRx"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sample4="using:WebinarRx.Sample4"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <sample4:ViewModel />
+    </Page.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBox Header="Search" ToolTipService.ToolTip="Type a search query" Text="{Binding SearchQuery, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <Button Grid.Column="1" Command="{Binding ExecuteSearch}" Content="Search" />
+        </Grid>
+
+        <ListView HorizontalContentAlignment="Stretch" Grid.Row="1"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="8"
+                 ItemsSource="{Binding SearchResults}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="5" d:DesignWidth="551" d:DesignHeight="124">
+                        <TextBlock Text="{Binding Title, Mode=OneWay}" />
+                        <TextBlock Text="{Binding DisplayUrl, Mode=OneWay}" FontSize="12" />
+                        <TextBlock Margin="10" TextWrapping="Wrap" TextTrimming="CharacterEllipsis"
+                                   Text="{Binding Description}" />
+                        <!--<TextBlock FontSize="12" Margin="12,2" TextAlignment="Right">
+                            <Hyperlink Command="{Binding OpenUrlCommand}" NavigateUri="{Binding Url}">
+                                <Run Text="{Binding DisplayUrl, Mode=OneWay}" />
+                            </Hyperlink>
+                        </TextBlock>-->
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
