@@ -19,6 +19,9 @@ namespace WebinarRx.Sample4
         {
             client = new WebSearchClient(new ApiKeyServiceClientCredentials("f891515b49d94b64aa91955aa92c1691"));
 
+            ExecuteSearch = ReactiveCommand.CreateFromTask(_ => Search(SearchQuery));
+            ExecuteSearch.Subscribe(r => SearchResults = r);
+
             this.WhenAnyValue(x => x.SearchQuery)
                 .Throttle(TimeSpan.FromSeconds(0.8), RxApp.TaskpoolScheduler)
                 .Select(query => query?.Trim())
@@ -26,12 +29,9 @@ namespace WebinarRx.Sample4
                 .Where(query => !string.IsNullOrWhiteSpace(query))
                 .ObserveOn(RxApp.MainThreadScheduler)
                 .InvokeCommand(ExecuteSearch);
-
-            ExecuteSearch = ReactiveCommand.CreateFromTask(() => Search(SearchQuery));
-            ExecuteSearch.Subscribe(z => SearchResults = z);
         }
 
-        public ReactiveCommand<Unit, IEnumerable<SearchResult>> ExecuteSearch { get; }
+        public ReactiveCommand<Unit, IEnumerable<SearchResult>> ExecuteSearch { get; set; }
 
 
         public IEnumerable<SearchResult> SearchResults
